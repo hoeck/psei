@@ -1,0 +1,113 @@
+FHDW Dresden
+PSE1 - DFx407 - Jan. 2009
+
+Programmieraufgabe Marching Cube (50% Prüfungsleistung)
+Gruppenarbeit / begleitendes Projekt mit unabhängigen Teilaufgaben
+
+=== Überblick
+Zweck: Visualisierung räumlich verteilter Daten
+
+Ein 3D-Skalar-Datenfeld (Datenquader) soll durch sogenannte Isoflächen anschaulich gemacht werden.
+Isoflächen sind Flächen mit gleichen Wert (Isobaren, Isothermen o.ä.).
+Das Problem lässt sich in mehrere Teilschritte zerlegen, s. Schema:
+
+Datenquader
+    |
+    | A1. Marching Cube <- Isoflächenwert
+    v
+Liste von Dreiecken A(x,y,z), B(x,y,z), C(x,y,z)
+    |
+    | A2. Kameratransformation <- Kameraposition, Blickrichtung
+    v
+Liste von Dreiecken im Kamerasystem
+    |
+    | A3. Backface Culling <- Mindestabstand von Kamera
+    v
+Liste von Dreiecken mit Flächennormale zur Kamera
+    |
+    | A4. Tiefensortierung  
+    v
+Liste von Dreiecken mit Flächennormale zur Kamera, von hinten nach vorn
+    |
+    | A5. Perspektivtransformation <- Projektionsabstand 
+    v
+Liste von Dreiecken mit Projektivkoordinaten und Flächennormale zur Kamera, von hinten nach vorn
+    |
+    | A6. Flat Shading, in Java mit Swing <- Beleuchtungsrichtung 
+    v
+bildliche Darstellung 
+
+Jede Teilaufgabe soll ein eigenständiges (Java-)Programm sein. 
+Die Zwischendaten sollen jeweils als Datei / Standarddatenstrom abgelegt werden.
+Die Programme müssen von Kommandozeile aus startbar sein.
+
+=== Dateiformate
+==== Datenquader
+----
+nx ny nz dx dy dz
+
+Datenwerte
+----
+Erläuterung:
+* nx, ny, nz ... Anzahl der Messstellen in den 3 Achsrichtungen
+* dx, dy, dz ... Abstand zwischen benachbarten Messstellen in den 3 Achsrichtung
+* nx*ny*nz Datenwerte als Gleitpunktzahlen
+
+==== Liste von Dreiecken
+----
+ax ay az bx by bz cx cy cz
+----
+je Dreieck eine Zeile aus Gleitpunktzahlen
+
+==== Liste von Dreiecken mit Normale
+----
+ax ay az bx by bz cx cy cz nx ny nz
+----
+je Dreieck eine Zeile aus Gleitpunktzahlen
+
+Erläuterung:
+* Normale n als Kreuzprodukt Vektor(A,B) x Vektor(A,C)
+* Betrag von n = 1 (normiert) 
+
+=== Gemeinsame genutzte Klassen
+
+Einige Datenklassen mit öffentlichen werden in mehreren Projekten benötigt:
+* Punkt3D(x,y,z)
+* Dreieck(A,B,C) aus Punkten A,B,C
+* Vektor3D(P1, P2)  bzw. Vektor3D(x,y,z)
+* Matrix3D(v1,v2,v3) bzw. Matrix3D(a11,a12,a13,a21,a22,a23,a31,a32,a33)
+
+Vereinbarung: englische Klassennamen?
+
+=== Gruppeneinteilung
+ca. 18 Teilnehmer = 6 Gruppen je 3 Teilnehmer
+
+==== Aufgabe A1
+Gruppe G1: Renz, Casper, Becker
+Gruppe G2: Schulze, Blatter
+
+==== Aufgaben A2-A5
+Gruppe G3: Lauterbach, Lauterbach, Kluge
+Gruppe G4: Söhnel, Wiegand, Kersten
+
+==== Aufgabe A6
+Gruppe G5: Lohmann, Peters, Kaminski
+Gruppe G6: Walter, Helm, Duckstein
+Gruppe G7: Voigt, Schiemichen
+
+=== Abgabe
+Termin: 04.03.2009
+zip-verpacktes Projekt per eMail an rene.richter@fhdw.de
+
+Programm (Quelltext+Kompilat)
+Dokumentation (Javadoc + kurze Benutzerdoku)
+
+=== Bewertung
+* 10% termingerechte Abgabe
+* 50% Quellcode 
+* 30% Doku
+* Je 2 Gruppe stehen im Wettbewerb miteinander.
+** Beurteilung von Kompilat (black box) + Doku
+** 10% für jeweils bessere Gruppe in Aufgabenkategorie
+** geheime Abstimmung durch alle Kursteilnehmer
+
