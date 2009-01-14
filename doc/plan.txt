@@ -9,10 +9,15 @@ Liste von Dreiecken A(x,y,z), B(x,y,z), C(x,y,z)
     |
     | A2. Kameratransformation <- Kameraposition, Blickrichtung
     v
+
+
 Liste von Dreiecken im Kamerasystem
     |
     | A3. Backface Culling <- Mindestabstand von Kamera
     v
+>> dinge die hinter der kamera sind wegschneiden
+>> raum vor der kamera freihalten
+
 Liste von Dreiecken mit Flächennormale zur Kamera
     |
     | A4. Tiefensortierung
@@ -21,5 +26,10 @@ Liste von Dreiecken mit Flächennormale zur Kamera, von hinten nach vorn
     |
     | A5. Perspektivtransformation <- Projektionsabstand 
     v
+>> x' = x * d/z
+>> y' = y * d/z
+
 Liste von Dreiecken mit Projektivkoordinaten und Flächennormale zur Kamera, von hinten nach vorn
+
+
 

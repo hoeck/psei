@@ -1,4 +1,4 @@
-package geom;
+package gruppe4.geom;
 
 public class Triangle {
 	public Point3D a, b, c;

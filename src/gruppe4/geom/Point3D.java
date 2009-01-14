@@ -1,4 +1,4 @@
-package geom;
+package gruppe4.geom;
 
 public class Point3D {
 	public float x, y, z;
