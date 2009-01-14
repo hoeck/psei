@@ -1,5 +1,7 @@
 package gruppe4.geom;
 
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  * Implementation of an immutable three-dimensional vector with basic vector operations.
@@ -54,6 +56,26 @@ public class Vector3D {
 	}
 	
 	/**
+     * Tries to create a Vector from a String of the format <code>"x y z"</code>
+     * where x,y and z are Floats and blank and "," are considered whitespace.
+     * @throws IllegalArgumentException when src doesn't contain a valid vector koordinate
+     * @throws NumberFormatException when a number cannot be read
+     */
+    public Vector3D(String src)
+	{
+        String[] s = src.split("[, ]+");
+
+        if (s.length != 3) {
+            throw new IllegalArgumentException("String param does not contain 3 tokens");
+        }
+        else {
+            this.x = Float.parseFloat(s[0]);
+            this.y = Float.parseFloat(s[1]);
+            this.z = Float.parseFloat(s[2]);            
+        }
+	}
+
+	/**
      * Calculates the dotproduct <code>dot</code> between this and another Vector.
      *
      * @return the dotproduct.
@@ -73,5 +95,14 @@ public class Vector3D {
     {
         Vector3D b = this;
         return new Vector3D(a.y*b.z - a.z*b.y, a.z*b.x - a.x*b.z, a.x*b.y - a.y*b.x);
+    }
+
+    public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[")
+            .append(this.x).append(", ")
+            .append(this.y).append(", ")
+            .append(this.z).append("]");
+		return stringBuilder.toString();
     }
 }
