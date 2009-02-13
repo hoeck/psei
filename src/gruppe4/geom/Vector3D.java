@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
  * Implementation of an immutable three-dimensional vector with basic vector operations.
  */
 public class Vector3D {
-	float x, y, z;
+    float x, y, z;
 
     /**
      * Get the X value.
@@ -33,7 +33,6 @@ public class Vector3D {
         return z;
     }
 
-
 	
 	/**
      * Creates a new <code>Vector3D</code> instance.
@@ -46,9 +45,9 @@ public class Vector3D {
 	}
 
 	/**
-     * Creates a new <code>Vector3D</code> instance out of 2 Points.
+     * Creates a new <code>Vector3D</code> instance out of 2 other <code>Vector3D</code> instances.
      */
-    public Vector3D(Point3D p1, Point3D p2)
+    public Vector3D(Vector3D p1, Vector3D p2)
 	{
 		this.x = p2.x - p1.x;
 		this.y = p2.y - p1.y;
@@ -85,6 +84,42 @@ public class Vector3D {
 		return x*v.x + y*v.y + z*v.z;
 	}
 
+    
+    /**
+     * Multiplies each scalar of this Vector with another skalar and returns the result as a new vector.
+     *
+     * @param s a scalar of type  <code>float</code>
+     * @return a new <code>Vector3D</code>.
+     */
+    public Vector3D product(float s)
+    {                
+        return new Vector3D(s*this.x, s*this.y, s*this.z);
+    }
+
+
+    /**
+     * Calculates the magnitude of this Vector3D 
+     *
+     * @return a <code>float</code> magnitude.
+     */
+    public float magnitude() {
+                
+        return (float)Math.sqrt(x*x + y*y + z*z);
+    }
+
+
+    /**
+     * Creates a new normalized instance of this Vector.
+     *
+     * @return a new normalized <code>Vector3D</code>.
+     */
+    public Vector3D normalize()
+    {
+        
+        float oneOverMagnitude = 1 / magnitude();
+        return this.product(oneOverMagnitude);
+    }
+
 
     /**
      * Compute the cross-product of this and another Vector
@@ -97,12 +132,17 @@ public class Vector3D {
         return new Vector3D(a.y*b.z - a.z*b.y, a.z*b.x - a.x*b.z, a.x*b.y - a.y*b.x);
     }
 
+    /**
+     * Creates a String representation of the Vector, which is readable with the Vector String constructor.
+     *
+     * @return a <code>String</code> of 3 floats separated by spaces
+     */
     public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[")
-            .append(this.x).append(", ")
-            .append(this.y).append(", ")
-            .append(this.z).append("]");
+        stringBuilder
+            .append(this.x).append(" ")
+            .append(this.y).append(" ")
+            .append(this.z);
 		return stringBuilder.toString();
     }
 }

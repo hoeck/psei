@@ -31,5 +31,8 @@ Liste von Dreiecken mit Flächennormale zur Kamera, von hinten nach vorn
 
 Liste von Dreiecken mit Projektivkoordinaten und Flächennormale zur Kamera, von hinten nach vorn
 
+Beispieloutput: 
+A              B              C              Flächennormale
+0.0 0.0 100.0  0.0 1.0 100.0  1.0 0.0 100.0  0.0 0.0 -1.0
 
 
