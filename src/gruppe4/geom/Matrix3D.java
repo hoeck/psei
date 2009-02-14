@@ -6,6 +6,7 @@ package gruppe4.geom;
  *
  */
 public class Matrix3D {
+
     Vector3D[] a;
   
     /**
@@ -20,4 +21,22 @@ public class Matrix3D {
         a[1] = v;
         a[2] = w;
     }
+
+    
+    /**
+     * Creates the product of this matrix and another vector.
+     *
+     * @param v a vector to multiply with
+     * @return the resulting vector
+     */
+    public Vector3D product(Vector3D v)
+    {
+        return new Vector3D(a[0].dot(v),
+                            a[1].dot(v),
+                            a[2].dot(v));
+    }
 }
+
+
+
+ 

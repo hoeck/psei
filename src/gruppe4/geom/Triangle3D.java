@@ -1,11 +1,55 @@
 package gruppe4.geom;
 
+import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
+
+
 /**
  * A Triangle is a shape consisting of 3 {@link gruppe4.geom.Vector3D} objects.
  *
  */
 public class Triangle3D {
-	public Vector3D[] points;
+
+	final Vector3D[] points;
+
+    public Vector3D getA()
+    {
+        return points[0];
+    }
+
+    public Vector3D getB()
+    {
+        return points[1];
+    }
+
+    public Vector3D getC()
+    {
+        return points[2];
+    }
+
+    /**
+     * Get the Points of this Triangle
+     * @return the Points in a immutable List, in a clockwise sequence.
+     */
+    public List<Vector3D> getPoints() 
+    {
+        return Collections.unmodifiableList(Arrays.asList(points));
+    }
+
+    
+    /**
+     * Creates a new <code>Triangle3D</code> out of 3 Vector3Ds.
+     *
+     */
+    public Triangle3D(Vector3D a, Vector3D b, Vector3D c)
+    {
+        points = new Vector3D[3];
+        points[0] = a;
+        points[1] = b;
+        points[2] = c;
+    }
+
 	
  	/**
      * Creates a new <code>Triangle3D</code> instance out of a String of 9 numbers.

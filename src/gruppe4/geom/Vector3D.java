@@ -126,11 +126,26 @@ public class Vector3D {
      *
      * @return a new <code>Vector3D</code>.
      */
-    public Vector3D CrossProduct(Vector3D a)
+    public Vector3D crossProduct(Vector3D a)
     {
         Vector3D b = this;
         return new Vector3D(a.y*b.z - a.z*b.y, a.z*b.x - a.x*b.z, a.x*b.y - a.y*b.x);
     }
+
+
+    /**
+     * Subtract Vector3D v from this Vector and return the result as a new Vector3D.
+     *
+     * @param v the vector to subtract.
+     * @return the resulting vector.
+     */
+    public Vector3D subtract(Vector3D v)
+    {
+        return new Vector3D(this.x - v.getX(),
+                            this.y - v.getY(),
+                            this.z - v.getZ());
+    }
+
 
     /**
      * Creates a String representation of the Vector, which is readable with the Vector String constructor.
