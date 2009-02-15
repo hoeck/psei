@@ -1,5 +1,6 @@
 package gruppe4.geom;
 
+import gruppe4.Util;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,7 +12,8 @@ import java.util.Collections;
  */
 public class Triangle3D {
 
-	final Vector3D[] points;
+	Vector3D[] points;
+    Vector3D normal;
 
     public Vector3D getA()
     {
@@ -81,13 +83,79 @@ public class Triangle3D {
      *
      * @return a <code>String</code> value
      */
-    public String toString() {
+    public String toString() 
+    {
 		StringBuilder stringBuilder = new StringBuilder();
         stringBuilder
             .append(points[0]).append(" ")
             .append(points[1]).append(" ")
             .append(points[2]);
 		return stringBuilder.toString();
+    }
+
+
+    /**
+     * Translates this triangle vector-points according to {@link Vector3D#transform}.
+     *
+     * @param rotM a rotation matrix
+     * @param transV a translation vector
+     * @return the transformed Triangle3D
+     */
+    public Triangle3D transform(Matrix3D rotM, Vector3D transV) 
+    {
+        return new Triangle3D(points[0].transform(rotM,transV),
+                              points[1].transform(rotM,transV),
+                              points[2].transform(rotM,transV));
+    }
+
+
+    /**
+     * Calculate and cache the normal of this Triangle.
+     *
+     * @return the normal
+     */
+    public Vector3D normal()
+    {       
+        //         _
+        //         A 
+        //          |\
+        //          | \     
+        //         _|__\ _
+        //         C     B
+        //              _ _   _ _
+        //  normal() = (B-A)x(C-A)
+
+        if (normal == null) {
+            normal = points[1].subtract(points[0]).crossProduct(points[2].subtract(points[0]));
+        }
+        return normal;
+    }
+    
+    /**
+     * Get the smallest Z value of any point of this triangle.
+     *
+     * @return a <code>float</code> value
+     */
+    public float getMinZ()
+    {
+        return Util.min3f(points[0].getZ(), points[1].getZ(), points[2].getZ());
+    }
+
+
+
+    /**
+     * Projects all vector-points of this triangle according to {@link Vector3D#project}
+     * (Note: the normal of this triangle does not get projected)
+     *
+     * @param d the offset factor
+     * @return the projected Triangle
+     */
+    public Triangle3D project(float d)
+    {        
+        return new Triangle3D(points[0].project(d),
+                              points[1].project(d),
+                              points[2].project(d));
+
     }
 }
 

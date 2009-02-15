@@ -25,7 +25,7 @@ Liste von Dreiecken im Kamerasystem
     v
 Liste von Dreiecken mit Flächennormale zur Kamera
     |
-    | A4. Tiefensortierung  
+    | A4. Tiefensortierung
     v
 Liste von Dreiecken mit Flächennormale zur Kamera, von hinten nach vorn
     |

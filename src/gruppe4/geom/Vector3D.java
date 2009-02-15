@@ -148,6 +148,18 @@ public class Vector3D {
 
 
     /**
+     * Translates this vector according to the params and returns a new vector as the result.
+     *
+     * @param rotM a rotation matrix
+     * @param transV a translation vector
+     * @return the transformed vector
+     */
+    public Vector3D transform(Matrix3D rotM, Vector3D transV) {
+        return rotM.product(this.subtract(transV));
+    }
+    
+
+    /**
      * Creates a String representation of the Vector, which is readable with the Vector String constructor.
      *
      * @return a <code>String</code> of 3 floats separated by spaces
@@ -160,4 +172,20 @@ public class Vector3D {
             .append(this.z);
 		return stringBuilder.toString();
     }
+
+
+    /**
+     * Projects this vector on the x-y plane use the offset-factor d.
+     *
+     * @param d the offset factor
+     * @return the projected Vector3D where x,y are the projected values and z is keeping its 3D value
+     */
+    public Vector3D project(float d)
+    {
+        // x' = x * d/z
+        // y' = y * d/z
+        float dz = d/z;
+        return new Vector3D(x*dz, y*dz, z);
+    }
 }
+
