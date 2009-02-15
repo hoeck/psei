@@ -2,6 +2,9 @@ package gruppe4;
 
 import gruppe4.geom.*;
 import java.io.Reader;
+import java.io.InputStreamReader;
+import java.io.Writer;
+import java.io.OutputStreamWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -11,56 +14,62 @@ import java.util.ArrayList;
  */
 public class Program {
 
-    World originalWorld;
+    World world;
     Vector3D cameraView;
     Vector3D cameraPos;
 
-    Matrix3D transMatrix;
 
-    public Program(Reader in, String camViewStr, String camStrPos) throws IOException, Exception
+    /**
+     * Creates the program with the given parameters.
+     *
+     * @param in a <code>Reader</code> to initialise the world
+     * @param camViewStr the camera direction
+     * @param camPosStr the camera position
+     * @exception IOException if an error occurs
+     * @exception Exception if an error occurs
+     */
+    public Program(Reader in, String camViewStr, String camPosStr) throws IOException, Exception
     {
-        originalWorld = new World(in);
+        world = new World(in);
         cameraView = new Vector3D(camViewStr);
-        cameraPos = new Vector3D(camStrPos);
+        cameraPos = new Vector3D(camPosStr);
     } 
 
 
     /**
-     * Describe <code>initTransMatrix</code> method here.
+     * create the transformation matrix
      *
      */
-    void initTransMatrix()
+    Matrix3D createTransMatrix()
     {
         Vector3D oben = new Vector3D(0,-1,0);
         Vector3D camX = cameraView.crossProduct(oben);
         Vector3D camY = cameraView.crossProduct(camX);
-        transMatrix = new Matrix3D(camX.normalize(), camY.normalize(), cameraView.normalize());
+        return new Matrix3D(camX.normalize(), camY.normalize(), cameraView.normalize());
     }
 
-    Vector3D transformPoint(Vector3D p) {
-        return transMatrix.product(p.subtract(cameraPos));
-    }
 
-    Triangle3D transformTriangle(Triangle3D t) {
-        return new Triangle3D(transformPoint(t.getA()),
-                              transformPoint(t.getB()),
-                              transformPoint(t.getC()));
-    }
-
-    World transformWorld(World w)
-    {
-        ArrayList<Triangle3D> lt = new ArrayList<Triangle3D>(w.getTriangles().size());
-        for(Triangle3D t : w.getTriangles()) {
-            lt.add(transformTriangle(t));
-        }
-        return new World(lt);
-    }
-
-    public String run()
+    /**
+     * Run the program with the given input data and options.
+     *
+     * @return a <code>String</code> value
+     */
+    public void run(Writer out) throws IOException
     {            
-        initTransMatrix();
-        World cameraTransformedWorld = transformWorld(originalWorld);
+        Matrix3D transMatrix = createTransMatrix();
+        world.transform(transMatrix, cameraPos);
+        //world.filterVisible();
+        //world.filterBackface(1);
+        world.sortDepth();
+        world.project(2f);
+        world.write(out);
+    }
 
-        return "";
+    static void createAndRun(String camViewStr, String camPosStr) throws IOException, Exception
+    {
+        Program p = new Program(new InputStreamReader(System.in), camViewStr, camPosStr);
+        p.run(new OutputStreamWriter(System.out));
     }
 }
+
+
