@@ -1,7 +1,13 @@
+# ide stuff
 gruppe4.el
+
+# compiled/generated stuff
 gruppe4.jar
 classes/
 doc/javadoc/
+samples/output
 
+# too big
+samples/input/marchedcubes.txt
 
 
