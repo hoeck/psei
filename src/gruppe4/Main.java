@@ -22,34 +22,34 @@ public class Main {
         System.out.printf("  Blickrichtung:   x,y,z  Blickrichtung der Kamera, (Vorgabe: %s)%n",defaultCamDirection);
     }
     
-    public static void main(String[] args) throws IOException, Exception
+    public static void main(String[] args) // throws IOException, Exception
     {
-
-        //for (Triangle d : dreiecke)
-        if ((args.length==1) && args[0].equalsIgnoreCase("-help"))
-            {
-                printHelp();
-                return;
-            }      
+        if ((args.length>=1) && args[0].matches(".*help.*")) {
+            printHelp();
+            return;
+        }
         // assume args[1] and args[2] are the optional arguments -> no whitespace in vector-args!
-        switch(args.length)
-            {
-            case 0:
-                Program.createAndRun(defaultCamDirection, defaultCamPosition);
-                break;
-            case 1:
-                Program.createAndRun(defaultCamDirection, args[0]);
-                break;
-            case 2:
-                Program.createAndRun(args[1], args[0]);
-                break;
-            default:
-                System.out.println("Fehler - zuviele Parameter"); 
+        try {
+            switch(args.length) {
+                case 0:
+                    Program.createAndRunFromStdio(defaultCamDirection, defaultCamPosition);
+                    break;
+                case 1:
+                    Program.createAndRunFromStdio(defaultCamDirection, args[0]);
+                    break;
+                case 2:
+                    Program.createAndRunFromStdio(args[1], args[0]);
+                    break;
+                default:
+                    System.err.println("Fehler - zuviele Parameter im Programmaufruf");
             }
-
-        
-        //Reader r = new InputStreamReader(System.in);
-        //new World(r)
+        }
+        catch (IllegalArgumentException e) {
+            System.err.println("Formatfehler: " + e.getMessage());
+        }
+        catch (IOException e) {
+            System.err.println("Fehler in der Ein-/Ausgabe: " + e.getMessage());
+        }        
     }
 }
- 
+

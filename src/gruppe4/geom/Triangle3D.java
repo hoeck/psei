@@ -62,7 +62,7 @@ public class Triangle3D {
      * @throws IllegalArgumentException when src doesn't contain a valid vector koordinate
      * @throws NumberFormatException when a number cannot be read
      */
-    public Triangle3D(String inp) 
+    public Triangle3D(String inp) throws IllegalArgumentException
     {
         String inputArrray[] = inp.split("[, ]+");
 

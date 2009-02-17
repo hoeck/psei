@@ -60,7 +60,7 @@ public class Vector3D {
      * @throws IllegalArgumentException when src doesn't contain a valid vector koordinate
      * @throws NumberFormatException when a number cannot be read
      */
-    public Vector3D(String src)
+    public Vector3D(String src) throws IllegalArgumentException
 	{
         String[] s = src.split("[, ]+");
 

@@ -28,7 +28,7 @@ public class Program {
      * @exception IOException if an error occurs
      * @exception Exception if an error occurs
      */
-    public Program(Reader in, String camViewStr, String camPosStr) throws IOException, Exception
+    public Program(Reader in, String camViewStr, String camPosStr) throws IOException, IllegalArgumentException
     {
         world = new World(in);
         cameraView = new Vector3D(camViewStr);
@@ -58,14 +58,24 @@ public class Program {
     {            
         Matrix3D transMatrix = createTransMatrix();
         world.transform(transMatrix, cameraPos);
-        //world.filterVisible();
-        //world.filterBackface(1);
+        world.filterVisible();
+        world.filterBackface(1);
         world.sortDepth();
         world.project(2f);
         world.write(out);
     }
 
-    static void createAndRun(String camViewStr, String camPosStr) throws IOException, Exception
+
+    /**
+     * Create a world from a stream of koordinates from System.in
+     * and the program with it writing results to System.out.
+     * 
+     * @param camViewStr a readable {@link Vector3D} representing the camera view vector
+     * @param camPosStr a readable {@link Vector3D} representing the camera position
+     * @exception IOException if an error occurs
+     * @exception Exception if an error occurs
+     */
+    static void createAndRunFromStdio(String camViewStr, String camPosStr) throws IOException, IllegalArgumentException
     {
         Program p = new Program(new InputStreamReader(System.in), camViewStr, camPosStr);
         p.run(new OutputStreamWriter(System.out));
