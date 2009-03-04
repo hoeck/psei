@@ -6,7 +6,7 @@ import java.io.IOException;
 
 /**
  * Starting point for the commandline version of the program.
- * See {@link main} for more details.
+ * See {@link Main#main} for more details.
  *
  */
 public class Main {
@@ -35,7 +35,7 @@ public class Main {
      * Main method for the commandline version of this program.
      *
      * reads the arguments in the given stringarray and calls the factorymethod
-     * {@link Program.createAndRunFromStdio()} to instantiate a new Program
+     * {@link Program#createAndRunFromStdio} to instantiate a new Program
      * and run it with the given commandline options.
      * On any Exceptions, print a short info about the cause and the stacktrace to
      * System.err

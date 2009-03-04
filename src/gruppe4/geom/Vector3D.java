@@ -115,8 +115,13 @@ public class Vector3D {
      */
     public Vector3D normalize()
     {
+        float oneOverMagnitude = 0;
+        float mag = magnitude();
         
-        float oneOverMagnitude = 1 / magnitude();
+        if (mag!=0) {
+            oneOverMagnitude = 1 / mag;
+        }
+
         return this.product(oneOverMagnitude);
     }
 
@@ -126,9 +131,9 @@ public class Vector3D {
      *
      * @return a new <code>Vector3D</code>.
      */
-    public Vector3D crossProduct(Vector3D a)
+    public Vector3D crossProduct(Vector3D b)
     {
-        Vector3D b = this;
+        Vector3D a = this;
         return new Vector3D(a.y*b.z - a.z*b.y, a.z*b.x - a.x*b.z, a.x*b.y - a.y*b.x);
     }
 
@@ -184,7 +189,13 @@ public class Vector3D {
     {
         // x' = x * d/z
         // y' = y * d/z
-        float dz = d/z;
+        
+        float dz = 1;
+
+        if (dz!=0) {
+            dz = d/z;
+        }
+
         return new Vector3D(x*dz, y*dz, z);
     }
 }

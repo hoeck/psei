@@ -6,12 +6,12 @@ package gruppe4.geom;
  */
 public class Matrix3D {
 
-    Vector3D[] a;
+    Vector3D[] a; // the matrix' rows
   
     /**
      * Creates a new <code>Matrix</code> instance.
      *
-     * Takes 3 <code>Vector</code> objects as rows.
+     * Takes 3 <code>Vector3D</code> objects as rows.
      */
     public Matrix3D(Vector3D u, Vector3D v, Vector3D w)
     {
