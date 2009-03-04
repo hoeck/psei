@@ -4,12 +4,21 @@ package gruppe4;
 import gruppe4.geom.*;
 import java.io.IOException;
 
+/**
+ * Starting point for the commandline version of the program.
+ * See {@link main} for more details.
+ *
+ */
 public class Main {
 
     final static String defaultCamPosition  = "0,0,-10";
     final static String defaultCamDirection = "0,0,1";
     
 
+    /**
+     * prints the help screen for this program
+     *
+     */
     static void printHelp()
     {
         System.out.println("Gruppe 4 Aufgaben 2 - 5");
@@ -22,7 +31,18 @@ public class Main {
         System.out.printf("  Blickrichtung:   x,y,z  Blickrichtung der Kamera, (Vorgabe: %s)%n",defaultCamDirection);
     }
     
-    public static void main(String[] args) // throws IOException, Exception
+    /**
+     * Main method for the commandline version of this program.
+     *
+     * reads the arguments in the given stringarray and calls the factorymethod
+     * {@link Program.createAndRunFromStdio()} to instantiate a new Program
+     * and run it with the given commandline options.
+     * On any Exceptions, print a short info about the cause and the stacktrace to
+     * System.err
+     *
+     * @param args a <code>String[]</code> value
+     */
+    public static void main(String[] args)
     {
         if ((args.length>=1) && args[0].matches(".*help.*")) {
             printHelp();
@@ -46,10 +66,12 @@ public class Main {
         }
         catch (IllegalArgumentException e) {
             System.err.println("Formatfehler: " + e.getMessage());
+            e.printStackTrace(System.err);
         }
         catch (IOException e) {
             System.err.println("Fehler in der Ein-/Ausgabe: " + e.getMessage());
-        }        
+            e.printStackTrace(System.err);
+        }
     }
 }
 

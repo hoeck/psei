@@ -54,7 +54,7 @@ public class Triangle3D {
 
 	
  	/**
-     * Creates a new <code>Triangle3D</code> instance out of a String of 9 numbers.
+     * Creates a new <code>Triangle3D</code> instance out of a String of 9 (floating-point) numbers.
      *
      * @param inp a <code>String</code> of 9 numbers, read with the <code>parseFloat</code> method
      *  and separated by spaces or commas.
@@ -158,7 +158,3 @@ public class Triangle3D {
 
     }
 }
-
-
-
-

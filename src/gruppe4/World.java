@@ -11,7 +11,8 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 /**
- * The World Class holds the representation of all Triangles.
+ * The World class holds the representation of all Triangles and implements
+ * various methods to do something on all triangles in in this world.
  *
  */
 public class World {
@@ -102,6 +103,7 @@ public class World {
         triangles = lt;
     }    
 
+
     /**
      * Remove all triangles behind the x-y plane.
      *
@@ -131,7 +133,6 @@ public class World {
     {
         Collections.sort(triangles, new Triangle3DDepthComparator());
     }
-
 
 
     /**
@@ -175,7 +176,6 @@ public class World {
         bw.flush();
         return triangles.size();
     }
-
 }
 
 

@@ -37,7 +37,8 @@ public class Program {
 
 
     /**
-     * create the transformation matrix
+     * create the transformation matrix using the camera position and camera view vector
+     * given in the constructor of this class.
      *
      */
     Matrix3D createTransMatrix()
@@ -52,7 +53,6 @@ public class Program {
     /**
      * Run the program with the given input data and options.
      *
-     * @return a <code>String</code> value
      */
     public void run(Writer out) throws IOException
     {            
@@ -72,6 +72,7 @@ public class Program {
      * 
      * @param camViewStr a readable {@link Vector3D} representing the camera view vector
      * @param camPosStr a readable {@link Vector3D} representing the camera position
+     * @exception IllegalArgumentException if there is an invalid formatted number in the input
      * @exception IOException if an error occurs
      * @exception Exception if an error occurs
      */

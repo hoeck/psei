@@ -3,10 +3,11 @@ package gruppe4.geom;
 import java.util.Comparator;
 
 /**
- * Orders Triangle3D objects according to their depth (lowest z koordinate).
+ * Orders Triangle3D objects according to their depth.
  *
  */
 public class Triangle3DDepthComparator implements Comparator<Triangle3D> {    
+
 
     public int compare(Triangle3D t1, Triangle3D t2)
     {
@@ -17,9 +18,10 @@ public class Triangle3DDepthComparator implements Comparator<Triangle3D> {
         }
     }
 
+
     public boolean equals(Object o)
-    {
-        return true;
+    {        
+        return true; // there is only one comparator
     }    
 }
 

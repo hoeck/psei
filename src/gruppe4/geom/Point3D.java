@@ -1,9 +1,21 @@
 package gruppe4.geom;
 
-public class Point3D {
-	public float x, y, z;
+
+/**
+ * Class for representing points in R^3
+ *
+ * @deprecated use {@link Vector3D} instead.
+ *
+ */
+public class Point3D  {
+
+    float x, y, z;
 	
-	public Point3D(float x, float y, float z)
+	/**
+     * create a new Point3D out of three floats.
+     *
+     */
+    public Point3D(float x, float y, float z)
 	{
 		this.x = x;
 		this.y = y;
